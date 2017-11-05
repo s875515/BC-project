@@ -47,7 +47,7 @@ class Laybel extends React.Component {
 
 function mapStateToProps(state, props) {
   return {
-    panelList:state.panel
+    panelList: state.panelList
   };
 }
 

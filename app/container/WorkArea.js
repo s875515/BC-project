@@ -28,7 +28,7 @@ class WorkArea extends Component {
 }
 function mapStateToProps(state, props) {
   return {
-    panelList:state.panel
+    panelList: state.panelList
   };
 }
 

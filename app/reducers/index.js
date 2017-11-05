@@ -1,12 +1,12 @@
-import panel from './panel.js'
-import category from './category.js'
-import page from './page.js'
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
+
+import { apiModel } from './apiModel';
+
+import panelList from './panelList';
 
 const rootReducer = combineReducers({
-  panel,
-  category,
-  page
+  panelList,
+  category: apiModel()
 });
 
 export default rootReducer;

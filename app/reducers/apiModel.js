@@ -1,41 +1,38 @@
 import * as ActionType from '../actions/actionType';
 import { combineReducers } from 'redux';
 
-export const apiModel = panel =>
+export const apiModel = type =>
   combineReducers({
-    result: result(panel),
-    isLoading: isLoading(panel),
-    isSuccess: isSuccess(panel),
-    isError: isError(panel)
+    result: result(type),
+    isLoading: isLoading(type),
+    isSuccess: isSuccess(type),
+    isError: isError(type)
   })
 
-const result = (panel) => (state = [], action) => {
-  // if (panel !== action.panel) return state;
+const result = (type) => (state = [], action) => {
   switch (action.type) {
-    case ActionType.loadDataCenter.RECEIVE_DATA:
+    case `${type}RECEIVE_DATA`:
       return action.res;
     default:
       return state;
   }
 }
 
-const isLoading = (panel) => (state = false, action) => {
-  // if (panel !== action.panel) return state;
+const isLoading = (type) => (state = false, action) => {
   switch (action.type) {
-    case ActionType.loadDataCenter.REQUEST_DATA: {
+    case `${type}REQUEST_DATA`: {
       return true;
     }
-    case ActionType.loadDataCenter.RECEIVE_DATA:
+    case `${type}RECEIVE_DATA`:
       return false;
     default:
       return state;
   }
 }
 
-const isSuccess = (panel) => (state = false, action) => {
-  // if (panel !== action.panel) return state;
+const isSuccess = (type) => (state = false, action) => {
   switch (action.type) {
-    case ActionType.loadDataCenter.RECEIVE_SUCCESS: {
+    case `${type}RECEIVE_SUCCESS`: {
       return true;
     }
     default:
@@ -43,10 +40,9 @@ const isSuccess = (panel) => (state = false, action) => {
   }
 }
 
-const isError = (panel) => (state = false, action) => {
-  // if (panel !== action.panel) return state;
+const isError = (type) => (state = false, action) => {
   switch (action.type) {
-    case ActionType.loadDataCenter.RECEIVE_ERROR: {
+    case `${type}RECEIVE_ERROR`: {
       return true;
     }
     default:

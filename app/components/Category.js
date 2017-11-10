@@ -9,15 +9,7 @@ import Item from './Item.js'
 
 class Category extends Component {
   openCategoryDetail = () => {
-    console.info("--- qqqq ---")
     this.props.addPanel();
-    // let payload =
-    // {
-    //   loading:false,
-    //   title:"Category Detail",
-    //   component: CategoryDetail,
-    // }
-    // this.props.actions.addPanel(payload)
   };
   openItem = (a,b) => {
     let itemData = [a,b]
@@ -25,14 +17,16 @@ class Category extends Component {
     // this.props.actions.addItemListPanel(panel)
     // this.props.userActions.loadItemList()
   }
+  handleLogin = () => {
+    this.props.login()
+  }
   render() {
     return (
       <div>
         <Spin spinning={false}>
         <div>
-          <button onClick={this.openCategoryDetail}>open Category Detail</button>
-          <button onClick={this.openItem.bind(this,"itemA","itemB")}>open item list</button>
-          <button onClick={this.openItem.bind(this,"itemC","itemD")}>open anoitem list</button>
+          <button onClick={this.handleLogin}>login</button>
+          <button onClick={this.openCategoryDetail}>add panel</button>
         </div>
         </Spin>
       </div>
@@ -41,7 +35,8 @@ class Category extends Component {
 }
 
 const actions = {
-  addPanel: panelAction.addPanel
+  addPanel: panelAction.addPanel,
+  login: panelAction.login
 }
 
 const mapStateToProps = (state, props) => {

@@ -1,52 +1,49 @@
 import * as ActionType from '../actions/actionType';
 
-export const loadDataCenter = (api, panel = 'category') => {
-  return (dispatch, getState) => {
-    dispatch(requestData(panel));
+export const loadDataCenter = (api, type) =>
+  (args) => (dispatch, getState) => {
+    dispatch(requestData(type));
     return fetch(api, {
-      method: 'GET',
+      method: 'post',
       headers: {
-        "authorization": "token 5aaa7454-5b26-4205-815f-dcd1ceb7aed9",
-        "content-type": "application/json",
-      }
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(args)
     }).then(res => {
       return res.json()
     }).then(res => {
-      if (res) {
-        dispatch(receiveData(panel, res));
-        dispatch(receiveSuccess(panel))
+      if (!res.hasOwnProperty('error_name')) {
+        dispatch(receiveData(type, res));
+        dispatch(receiveSuccess(type))
       } else {
-        dispatch(receiveError(panel));
+        dispatch(receiveError(type));
       }
+      return res;
     })
   }
-}
 
-export const requestData = (panel) => (
+export const requestData = (type) => (
   {
-    type: ActionType.loadDataCenter.REQUEST_DATA,
-    panel
+    type: `${type}REQUEST_DATA`,
   }
 );
 
-export const receiveData = (panel, res) => (
+export const receiveData = (type, res) => (
   {
-    type: ActionType.loadDataCenter.RECEIVE_DATA,
+    type: `${type}RECEIVE_DATA`,
     res,
-    panel
   }
 );
 
-export const receiveSuccess = (panel) => (
+export const receiveSuccess = (type) => (
   {
-    type: ActionType.loadDataCenter.RECEIVE_SUCCESS,
-    panel
+    type: `${type}RECEIVE_SUCCESS`,
   }
 );
 
-export const receiveError = (panel) => (
+export const receiveError = (type) => (
   {
-    type: ActionType.loadDataCenter.RECEIVE_ERROR,
-    panel
+    type: `${type}RECEIVE_ERROR`,
   }
 );

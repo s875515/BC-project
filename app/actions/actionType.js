@@ -8,3 +8,8 @@ export const loadDataCenter = {
 export const panel = {
   ADD_PANEL: 'ADD_PANEL'
 }
+
+export const account = {
+  LOGIN: 'LOGIN',
+  SELECT_COMPANY: 'SELECT_COMPANY'
+}
